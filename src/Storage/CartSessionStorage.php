@@ -17,55 +17,44 @@ class CartSessionStorage
     private $requestStack;
 
     /**
-     * The cart repository.
-     * 
-     * @var OrderRepository
-     */
-    private $cartRepository;
-
-    /**
      * @var string
      */
-    public const CART_KEY_NAME = 'cart_id';
+    public const CART_KEY_NAME = 'cart';
 
     /**
      * CartSessionStorage constructor.
      */
-    public function __construct(RequestStack $requestStack, OrderRepository $cartRepository)
+    public function __construct(RequestStack $requestStack)
     {
         $this->requestStack = $requestStack;
-        $this->cartRepository = $cartRepository;
-
     }
+
     /**
-     * Gets the cart in session.
+     * Gets the cart from the session.
      */
     public function getCart(): ?Order
     {
-        return $this->cartRepository->findOneBy([
-            'id'=> $this->getCartId(),
-            'status'=> Order::STATUS_CART,
-        ]);
+        return $this->getSession()->get(self::CART_KEY_NAME);
     }
 
     /**
-     * Sets the cart is session.
+     * Sets the cart in the session.
      */
     public function setCart(Order $cart): void
-     {
-        $this->getSession()->set(self::CART_KEY_NAME, $cart->getId());
-     }
+    {
+        $this->getSession()->set(self::CART_KEY_NAME, $cart);
+    }
 
-     /**
-      * Returns the cart id.
-      */
-      private function getCartId(): ?int
-      {
-        return $this->getSession()->get(self::CART_KEY_NAME);
-      }
+    /**
+     * Removes the cart from the session.
+     */
+    public function removeCart(): void
+    {
+        $this->getSession()->remove(self::CART_KEY_NAME);
+    }
 
-      private function getSession(): SessionInterface
-      {
+    private function getSession(): SessionInterface
+    {
         return $this->requestStack->getSession();
-      }
+    }
 }

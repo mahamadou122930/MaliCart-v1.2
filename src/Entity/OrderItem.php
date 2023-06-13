@@ -13,14 +13,14 @@ class OrderItem
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orderItems')]
+    #[ORM\ManyToOne(inversedBy: 'orderItems', cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?ShopProduct $shopproduct = null;
 
     #[ORM\Column]
     private ?int $quantity = null;
 
-    #[ORM\ManyToOne(inversedBy: 'orderItems')]
+    #[ORM\ManyToOne(inversedBy: 'orderItems', cascade: ["persist"])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Order $myOrder = null;
 

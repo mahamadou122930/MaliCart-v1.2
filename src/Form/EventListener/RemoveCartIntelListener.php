@@ -3,19 +3,18 @@
 namespace App\Form\EventListener;
 
 use App\Entity\Order;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Storage\CartSessionStorage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
 class RemoveCartItemListener implements EventSubscriberInterface
 {
+    private $cartSessionStorage;
 
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(CartSessionStorage $cartSessionStorage)
     {
-        $this->entityManager = $entityManager;
+        $this->cartSessionStorage = $cartSessionStorage;
     }
 
     /**
@@ -32,7 +31,7 @@ class RemoveCartItemListener implements EventSubscriberInterface
     public function postSubmit(FormEvent $event): void
     {
         $form = $event->getForm();
-        $cart = $form->getData();
+        $cart = $this->cartSessionStorage->getCart();
 
         if (!$cart instanceof Order) {
             return;
@@ -46,9 +45,7 @@ class RemoveCartItemListener implements EventSubscriberInterface
             }
         }
 
-        // Persist and flush changes to the database
-        $this->entityManager->persist($cart);
-        $this->entityManager->flush();
-
+        // Save the updated cart back to the session
+        $this->cartSessionStorage->setCart($cart);
     }
 }

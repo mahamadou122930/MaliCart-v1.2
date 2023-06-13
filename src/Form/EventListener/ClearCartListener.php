@@ -3,20 +3,19 @@
 namespace App\Form\EventListener;
 
 use App\Entity\Order;
-use Doctrine\ORM\EntityManagerInterface;
+use App\Storage\CartSessionStorage;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class ClearCartListener implements EventSubscriberInterface
+class RemoveCartItemListener implements EventSubscriberInterface
 {
-    private $entityManager;
+    private $cartSessionStorage;
 
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(CartSessionStorage $cartSessionStorage)
     {
-        $this->entityManager = $entityManager;
+        $this->cartSessionStorage = $cartSessionStorage;
     }
-
 
     /**
      * {@inheritDoc}
@@ -27,28 +26,26 @@ class ClearCartListener implements EventSubscriberInterface
     }
 
     /**
-     * Removes all items from the cart when the clear button is clicked.
+     * Removes items from the cart based on the data sent from the user.
      */
     public function postSubmit(FormEvent $event): void
     {
         $form = $event->getForm();
-        $cart = $form->getData();
+        $cart = $this->cartSessionStorage->getCart();
 
         if (!$cart instanceof Order) {
             return;
         }
 
-        // Is the clear button clicked?
-        if (!$form->get('clear')->isClicked()) {
-            return;
+        // Removes items from the cart
+        foreach ($form->get('orderItems')->all() as $child) {
+            if ($child->get('remove')->isClicked()) {
+                $cart->removeOrderItem($child->getData());
+                break;
+            }
         }
 
-        
-
-        // Clears the cart
-        $cart->removeOrderItems();
-
-        $this->entityManager->persist($cart);
-        $this->entityManager->flush();
+        // Save the updated cart back to the session
+        $this->cartSessionStorage->setCart($cart);
     }
 }

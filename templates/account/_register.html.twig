@@ -1,0 +1,42 @@
+<form class="needs-validation tab-pane fade" novalidate action="{{ path('register') }}" method="post" autocomplete="off" id="signup-tab">
+              <div class="mb-3">
+                <label class="form-label" for="register_firstname" >First Name</label>
+                <input class="form-control" type="text" required id="register_firstname" name="register[firstname]" placeholder="Mahamadou" required>
+                <div class="invalid-feedback">Please fill in your first name.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="register_lastname">Last Name</label>
+                <input class="form-control" type="text" required id="register_lastname" name="register[lastname]" placeholder="Doucouré" required>
+                <div class="invalid-feedback">Please fill in your name.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="register_phoneNumber" >Phone Number</label>
+                <input class="form-control"type="tel" required id="register_phoneNumber" name="register[phoneNumber]" required>
+                <div class="invalid-feedback">Please fill in your name.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="register_email" >Email address</label>
+                <input class="form-control" type="email" required id="register_email" name="register[email]"  placeholder="mahamadou.doucoure@gmail.com" required>
+                <div class="invalid-feedback">Please provide a valid email address.</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="register_password">Password</label>
+                <div class="password-toggle">
+                  <input class="form-control" type="password" required id="register_password" name="register[password]" >
+                  <label class="password-toggle-btn" aria-label="Show/hide password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="register_password_confirm">Confirm password</label>
+                <div class="password-toggle">
+                  <input class="form-control" type="password" required id="register_password_confirm" name="register[password_confirm]">
+                  <label class="password-toggle-btn" aria-label="Show/hide password">
+                    <input class="password-toggle-check" type="checkbox"><span class="password-toggle-indicator"></span>
+                  </label>
+                </div>
+              </div>
+              <button class="btn btn-primary btn-shadow d-block w-100" type="submit" id="register_submit" name="register[submit]">Sign up</button>
+              <input type="hidden" id="register__token" name="register[_token]" value="{{ csrf_token('register') }}">
+           </form>

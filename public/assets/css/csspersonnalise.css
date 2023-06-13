@@ -1,0 +1,9 @@
+.vertical-options label {
+    display: block;
+}
+
+.vertical-options input[type="checkbox"],
+.vertical-options input[type="radio"] {
+    display: block;
+    margin-left: 0;
+}

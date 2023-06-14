@@ -45,6 +45,9 @@ class Order
     #[ORM\Column(length: 255)]
     private ?string $reference = null;
 
+    #[ORM\Column]
+    private ?int $state = null;
+
     public function __construct()
     {
         $this->orderItems = new ArrayCollection();
@@ -223,6 +226,18 @@ class Order
     public function setReference(string $reference): static
     {
         $this->reference = $reference;
+
+        return $this;
+    }
+
+    public function getState(): ?int
+    {
+        return $this->state;
+    }
+
+    public function setState(int $state): static
+    {
+        $this->state = $state;
 
         return $this;
     }

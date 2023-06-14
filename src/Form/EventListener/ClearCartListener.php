@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
 
-class RemoveCartItemListener implements EventSubscriberInterface
+class ClearCartListener implements EventSubscriberInterface
 {
     private $cartSessionStorage;
 
@@ -26,7 +26,7 @@ class RemoveCartItemListener implements EventSubscriberInterface
     }
 
     /**
-     * Removes items from the cart based on the data sent from the user.
+     * Removes all items from the cart when the clear button is clicked.
      */
     public function postSubmit(FormEvent $event): void
     {
@@ -37,13 +37,13 @@ class RemoveCartItemListener implements EventSubscriberInterface
             return;
         }
 
-        // Removes items from the cart
-        foreach ($form->get('orderItems')->all() as $child) {
-            if ($child->get('remove')->isClicked()) {
-                $cart->removeOrderItem($child->getData());
-                break;
-            }
+        // Is the clear button clicked?
+        if (!$form->get('clear')->isClicked()) {
+            return;
         }
+
+        // Clears the cart
+        $cart->removeOrderItems();
 
         // Save the updated cart back to the session
         $this->cartSessionStorage->setCart($cart);

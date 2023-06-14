@@ -15,6 +15,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 class CartType extends AbstractType
 {
 
+    private $cartSessionStorage;
+
+    public function __construct(CartSessionStorage $cartSessionStorage)
+    {
+        $this->cartSessionStorage = $cartSessionStorage;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -24,8 +31,8 @@ class CartType extends AbstractType
             ->add('save', SubmitType::class)
             ->add('clear', SubmitType::class);
             
-        $builder->addEventSubscriber(new RemoveCartItemListener());
-        $builder->addEventSubscriber(new ClearCartListener());
+        $builder->addEventSubscriber(new RemoveCartItemListener($this->cartSessionStorage));
+        $builder->addEventSubscriber(new ClearCartListener($this->cartSessionStorage));
     }
 
     public function configureOptions(OptionsResolver $resolver)

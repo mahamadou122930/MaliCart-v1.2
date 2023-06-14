@@ -30,14 +30,14 @@ class Order
     private Collection $orderItems;
 
     #[ORM\ManyToOne(inversedBy: 'orders')]
-    #[ORM\JoinColumn(nullable: true)]
+    #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\Column(length: 255)]
     private ?string $carrierName = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $carrierPrice = null;
+    private ?float $carrierPrice = null;
 
     #[ORM\Column(length: 255)]
     private ?string $delivery = null;

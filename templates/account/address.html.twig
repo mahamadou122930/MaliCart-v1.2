@@ -66,15 +66,16 @@
             <div class="table-responsive fs-md">
               <table class="table table-hover mb-0">
                 <thead>
+                {% if app.user.addresses|length == 0 %}
+              Vous n'aver pas encore enregistrer d'adresse.
+              {% else %}
                   <tr>
                     <th>Address</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% if app.user.addresses|length == 0 %}
-              Vous n'aver pas encore enregistrer d'adresse.
-              {% else %}
+                  
               {% for address in app.user.addresses %}
                 <tr>
                     <td class="py-3 align-middle">{{ address.address}},{{ address.city}},{{ address.postal}},{{ address.country}}<span class="align-middle badge bg-info ms-2">Primary</span></td>

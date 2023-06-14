@@ -49,6 +49,10 @@ class Address
         return $this->id;
     }
 
+    public function __toString()
+    {
+        return $this->getName().': '.$this->getAddress().', '.$this->getCity().', '.$this->getCountry();
+    }
     public function getUser(): ?User
     {
         return $this->user;

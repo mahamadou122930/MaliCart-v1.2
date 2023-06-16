@@ -51,7 +51,7 @@ class Address
 
     public function __toString()
     {
-        return $this->getName().': '.$this->getAddress().', '.$this->getCity().', '.$this->getCountry();
+        return $this->getName().' :'.$this->getAddress().', '.$this->getCity().' - '.$this->getCountry().'[br]';
     }
     public function getUser(): ?User
     {

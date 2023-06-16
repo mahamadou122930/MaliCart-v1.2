@@ -49,94 +49,12 @@
             
             <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Shipping address</h2>
             <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-fn">First Name</label>
-                  <input class="form-control" type="text" id="checkout-fn">
-                </div>
+              <div class ="col-md-6">
+              {% set formHtml %}
+                {{ form(form) }}
+              {% endset %}
+              {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
               </div>
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-ln">Last Name</label>
-                  <input class="form-control" type="text" id="checkout-ln">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-email">E-mail Address</label>
-                  <input class="form-control" type="email" id="checkout-email">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-phone">Phone Number</label>
-                  <input class="form-control" type="text" id="checkout-phone">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-company">Company</label>
-                  <input class="form-control" type="text" id="checkout-company">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-country">Country</label>
-                  <select class="form-select" id="checkout-country">
-                    <option>Choose country</option>
-                    <option>Australia</option>
-                    <option>Canada</option>
-                    <option>France</option>
-                    <option>Germany</option>
-                    <option>Switzerland</option>
-                    <option>USA</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-city">Country</label>
-                  <select class="form-select" id="checkout-city">
-                    <option>Choose city</option>
-                    <option>Amsterdam</option>
-                    <option>Berlin</option>
-                    <option>Geneve</option>
-                    <option>New York</option>
-                    <option>Paris</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-zip">ZIP Code</label>
-                  <input class="form-control" type="text" id="checkout-zip">
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-address-1">Address 1</label>
-                  <input class="form-control" type="text" id="checkout-address-1">
-                </div>
-              </div>
-              <div class="col-sm-6">
-                <div class="mb-3">
-                  <label class="form-label" for="checkout-address-2">Address 2</label>
-                  <input class="form-control" type="text" id="checkout-address-2">
-                </div>
-              </div>
-            </div>
-            <h6 class="mb-3 py-3 border-bottom">Billing address</h6>
-            <div class="form-check">
-              <input class="form-check-input" type="checkbox" checked id="same-address">
-              <label class="form-check-label" for="same-address">Same as shipping address</label>
             </div>
             <!-- Navigation (desktop)-->
             <div class="d-none d-lg-flex pt-4 mt-3">
@@ -183,7 +101,7 @@
                 </ul>
                 <h3 class="fw-normal text-center my-4">$274.<small>50</small></h3>
                 <form class="needs-validation" method="post" novalidate>
-                  <div class="mb-3">
+                  <div class="mb-3">!
                     <input class="form-control" type="text" placeholder="Promo code" required>
                     <div class="invalid-feedback">Please provide promo code.</div>
                   </div>

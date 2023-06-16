@@ -54,7 +54,6 @@ class OrderController extends AbstractController
         }
 
 
-
         return $this->render('order/order_shipping.html.twig', [
             'form'=> $form->createView(),
             'cart'=> $cart->getCurrentCart()

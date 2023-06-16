@@ -26,7 +26,7 @@ class OrderCarrierType extends AbstractType
             'expanded' => true
         ])
         -> add('submit', SubmitType::class, [
-            'label' => 'Proceed to Shipping',
+            'label' => 'Proceed to Payment',
             'attr' => [
                 'class'=> 'btn btn-primary d-block w-100'
             ]

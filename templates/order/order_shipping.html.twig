@@ -40,12 +40,7 @@
             <h2 class="h6 pb-3 mb-2">Choose shipping method</h2>
             <div class="table-responsive">
               <table class="table table-hover fs-sm border-top">
-                            {% set formHtml %}
-                {{ form(form) }}
-                {% endset %}
-
-
-            {{ formHtml|replace({'[br]' : '<br/>'})|raw }}
+             
                 <thead>
                   <tr>
                     <th class="align-middle"></th>

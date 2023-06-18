@@ -49,7 +49,7 @@
             
             <h2 class="h6 pt-1 pb-3 mb-3 border-bottom">Shipping address</h2>
             <div class="row">
-            {{ form_start(form) }}
+            {{ form_start(form, {action:path('order_shipping')}) }}
               
               {{ form_row(form.addresses) }}
               

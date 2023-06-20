@@ -26,6 +26,7 @@ class CartController extends AbstractController
             return $this->redirectToRoute('cart');
         }
 
+        dd($cart);
 
         return $this->render('cart/index.html.twig', [
             'cart' => $cart,

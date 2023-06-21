@@ -23,6 +23,9 @@ class Carrier
     #[ORM\Column]
     private ?float $price = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $deliverytime = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -64,6 +67,18 @@ class Carrier
     public function setPrice(float $price): static
     {
         $this->price = $price;
+
+        return $this;
+    }
+
+    public function getDeliverytime(): ?string
+    {
+        return $this->deliverytime;
+    }
+
+    public function setDeliverytime(string $deliverytime): static
+    {
+        $this->deliverytime = $deliverytime;
 
         return $this;
     }

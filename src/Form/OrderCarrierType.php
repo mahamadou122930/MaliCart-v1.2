@@ -17,8 +17,7 @@ class OrderCarrierType extends AbstractType
 
 
         $builder
-
-        ->add('carriers', EntityType::class, [
+    ->add('carriers', EntityType::class, [
             'label'=> 'Choisissez votre adresse de livraison',
             'required' => true,
             'class'=> Carrier::class,

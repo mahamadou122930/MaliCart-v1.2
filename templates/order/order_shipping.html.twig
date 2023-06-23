@@ -51,19 +51,21 @@
                   </tr>
                 </thead>
                 <tbody>
-                
-                  {% for carrier in carriers %}
-                    <tr>
-                      <td>
-                        <div class="form-check mb-4">
-                          <input class="form-check-input" type="radio" name="carrier" id="carrier_{{ carrier.id }}" checked>
-                          <label class="form-check-label" for="carrier_{{ carrier.id }}"></label>
-                        </div>
-                      </td>
-                      <td class="align-middle"><span class="text-dark fw-medium">{{ carrier.name }}</span><br><span class="text-muted">{{ carrier.description }}</span></td>
-                      <td class="align-middle">{{ carrier.deliverytime}}</td>
-                      <td class="align-middle">{{ carrier.price}}</td>
-                    </tr>
+                  {% for carrier in form.carrier %}
+                      <tr>
+                          <td>
+                              <div class="form-check mb-4">
+                                  {{ form_widget(carrier, {'attr': {'class': 'form-check-input'}}) }}
+                                  {{ form_label(carrier, null, {'label_attr': {'class': 'form-check-label'}}) }}
+                              </div>
+                          </td>
+                          <td class="align-middle">
+                              <span class="text-dark fw-medium"></span><br>
+                              <span class="text-muted"></span>
+                          </td>
+                          <td class="align-middle"></td>
+                          <td class="align-middle"></td>
+                      </tr>
                   {% endfor %}
                 </tbody>
               </table>

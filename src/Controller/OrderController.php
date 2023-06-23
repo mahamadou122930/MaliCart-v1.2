@@ -58,14 +58,15 @@ class OrderController extends AbstractController
         
         $carriers = $this->entityManager->getRepository(Carrier::class)->findAll();
         
-        $form = $this->createForm(OrderCarrierType::class, null);
-
+        $form = $this->createForm(OrderCarrierType::class);
         $form->handleRequest($request);
-
+    
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $shipping = $form->getData();
+            $selectedCarrier = $shipping['carrier']->getId();
+            dd($selectedCarrier);
         }
-
+        
 
         return $this->render('order/order_shipping.html.twig', [
             'form'=> $form->createView(),
